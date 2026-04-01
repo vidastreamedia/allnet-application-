@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0f2a">
+  <title>AllNetAdvert</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #070b1c 0%, #0f142e 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    /* logo */
+    .logo {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 24px;
+      background-image: url('https://i.postimg.cc/QM3R8Qh6/Gemini-Generated-Image-z1xlfcz1xlfcz1xl-removebg-preview.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+    }
+
+    /* bold typography */
+    .brand {
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFFFFF, #bfd6ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ccd9ff;
+      margin-bottom: 32px;
+    }
+
+    /* progress bar */
+    .progress-container {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 100px;
+      height: 4px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #c084fc);
+      border-radius: 100px;
+      transition: width 0.02s linear;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="logo" aria-label="AllNetAdvert logo"></div>
+  <div class="brand">AllNetAdvert</div>
+  <div class="message">Loading experience</div>
+  <div class="progress-container">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<script>
+  const REDIRECT_URL = "https://allnetadvert.com/";
+  const DURATION = 2000; // 2 seconds
+  const startTime = performance.now();
+  const progressFill = document.getElementById("progressFill");
+  let animationFrame = null;
+  let redirectTriggered = false;
+
+  function updateProgress(now) {
+    const elapsed = now - startTime;
+    let percent = Math.min(100, (elapsed / DURATION) * 100);
+    progressFill.style.width = percent + "%";
+
+    if (elapsed >= DURATION && !redirectTriggered) {
+      redirectTriggered = true;
+      window.location.href = REDIRECT_URL;
+      return;
+    }
+    animationFrame = requestAnimationFrame(updateProgress);
+  }
+
+  animationFrame = requestAnimationFrame(updateProgress);
+
+  // Fallback timeout
+  setTimeout(() => {
+    if (!redirectTriggered) {
+      redirectTriggered = true;
+      window.location.href = REDIRECT_URL;
+    }
+  }, DURATION + 100);
+</script>
+
+<noscript>
+  <meta http-equiv="refresh" content="2; url=https://allnetadvert.com/">
+</noscript>
+</body>
+</html>
